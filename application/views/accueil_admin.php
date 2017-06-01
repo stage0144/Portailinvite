@@ -9,7 +9,7 @@
         <meta name="description" content="Connexion à mon application">
         <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
         <!-- ci-dessous notre fichier CSS -->
-        <link rel="stylesheet" type="text/css" href="http://localhost/portailinvite/assets/css/app.css" />
+        <link rel="stylesheet" type="text/css" href="http://<?php echo base_url(); ?>portailinvite/assets/css/app.css" />
         <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Open+Sans:400,300" />
         <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Lato:400,700,300" />
         <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
@@ -48,7 +48,7 @@
 									<?php echo "<td>".$unInvite['nom']."</td>"; ?>
 									<?php echo "<td>".$unInvite['prenom']."</td>"; ?>
                                    <?php echo " <td>".$unInvite['mail']."</td>"; ?>
-									<td><a class="btn btn-success btn btn-success" href="<?php echo base_url(); ?>/index.php/portailinvite/supprimer_invite/<?php echo $unInvite['login'];?>"><i class="material-icons">supprimer</i></a></td>
+									<td><a class="btn btn-success btn btn-success" href="<?php echo base_url(); ?>index.php/portailinvite/supprimer_invite/<?php echo $unInvite['login'];?>"><i class="material-icons">supprimer</i></a></td>
                                     <td><a class="btn btn-success btn btn-success" href="<?php echo base_url(); ?>index.php/portailinvite/renvoi_mail/<?php echo $unInvite['login'];?>"><i class="material-icons">Renvoyer un mail</i></a></td>
 							</tr>
 				    <?php endforeach ?>

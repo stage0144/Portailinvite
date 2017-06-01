@@ -25,10 +25,12 @@ class Portailinvite extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
+		// On charge les différents modèles qui ont été créés
 		$this->load->model('Invite_model');
 		$this->load->model('Mail_model');
 		$this->load->model('Admin_model');
-	        $this->load->library('form_validation');
+		
+	    $this->load->library('form_validation');
 		$this->load->helper('url');
 	}
 	 
