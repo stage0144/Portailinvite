@@ -40,12 +40,12 @@ class Invite_model extends CI_Model {
         
         // Fonction qui supprime un invité dans la BDD grâce à son login
         
-        public function supprimer_invite($login)
+    public function supprimer_invite($login)
 	{
 		$this->db->where('login', $login);
 		$this->db->delete('portail_invite.invite');
 		$this->db->where('username', $login);
-                $this->db->delete('radius.radcheck');
+        $this->db->delete('radius.radcheck');
 	}
         
         
@@ -89,7 +89,8 @@ class Invite_model extends CI_Model {
 			'prenom' => $prenom,
 			'mail' => $mail,
 			'login' => $login,
-        	        'password' => $password
+        	'password' => $password,
+        	'date_inscription' => $date("d.m.Y")
 		);
 			
 		$this->db->insert('portail_invite.invite',$data);
@@ -105,7 +106,7 @@ class Invite_model extends CI_Model {
 
 		 $this->db->insert('radius.radcheck',$data);
 		
-            	$resultat['login'] = $login;
+        $resultat['login'] = $login;
 		$resultat['password'] = $password;
 		return $resultat;
 	}
@@ -120,5 +121,40 @@ class Invite_model extends CI_Model {
 	         ->result_array();
             return $data;
         }
+        
+        // Fonction permettant de vérifier que le compte invité a été créé dans la journée 
+        
+        public function verif_date($login)
+        {
+			$data = $this->db->select('*')
+	         ->from('portail_invite.invite')
+	         ->where('login', $login)
+	         ->get()
+	         ->result_array();
+	         
+	         if($data != NULL)
+	         {
+					$date_courante = date("d.m.Y");
+					$data[0]['date_inscription'];
+					if($date_courante != $data[0]['date_inscription']){
+						return false;
+					}
+					else 
+					{
+						return true;
+					}
+			 }
+		}
+		
+		// Fonction permettant de réinitialiser la date d'inscription d'un invité pour lui redonner accès à la wifi dans la journée
+		
+		public function reinitialiser_date($login)
+		{
+			$data = array(
+    			'date_inscription' => date("d.m.Y"),
+			);			
+			$this->db->where('login', $login);
+			$this->db->update('portail_invite.invite', $data);
+		}
     }
 ?>

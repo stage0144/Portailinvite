@@ -70,7 +70,14 @@ class Portailinvite extends CI_Controller {
                 }
                 else if($this->logincheck($this->input->post('login')) && $this->passwordcheck($this->input->post('password')))
                 {
-                    $this->connexion_wifi($this->input->post('login'),$this->input->post('password'));
+					if(verif_date($this->input->post('login'))
+					{
+						$this->connexion_wifi($this->input->post('login'),$this->input->post('password'));
+					}
+					else
+					{
+						$this->load->view('compte_invalide');
+					}
 		}
 	}
 }
