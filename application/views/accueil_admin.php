@@ -52,7 +52,7 @@
 									<?php echo "<td>".$unInvite['prenom']."</td>"; ?>
                                    <?php echo " <td>".$unInvite['mail']."</td>"; ?>
 									<td><a class="btn btn-success btn btn-success" href="<?php echo base_url(); ?>index.php/portailinvite/supprimer_invite/<?php echo $unInvite['login'];?>"><i class="material-icons">supprimer</i></a></td>
-                                    <td><a class="btn btn-success btn btn-success" href="<?php echo base_url(); ?>index.php/portailinvite/renvoi_mail/<?php echo $unInvite['login'];?>"><i class="material-icons">Renvoyer un mail</i></a></td>
+                                    <td><a class="btn btn-success btn btn-success" href="<?php echo base_url(); ?>index.php/portailinvite/reinitaliser_compte/<?php echo $unInvite['login'];?>"><i class="material-icons">Réinitialiser le compte</i></a></td>
 							</tr>
 				    <?php endforeach ?>
                 </tbody>

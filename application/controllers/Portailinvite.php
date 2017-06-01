@@ -171,7 +171,7 @@ class Portailinvite extends CI_Controller {
     
     // Fonction qui gère l'envoi du mail contenant les identifiants de l'invité
     
-    public function renvoi_mail($login)
+    public function reinitaliser_compte($login)
     {
         $invite = $this->Invite_model->get_invite($login);
         foreach ($invite as $key => $unInvite){
@@ -183,6 +183,7 @@ class Portailinvite extends CI_Controller {
             }
         }
         $this->Mail_model->envoi_mail($nom,$prenom,$mail,$login,$password);
+        $this->Invite_model->reinitialiser_date($login);
         $this->accueil_admin();
     }
 }
