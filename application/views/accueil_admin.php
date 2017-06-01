@@ -41,7 +41,8 @@
                     <th>login</th>
                     <th>Nom</th>
                     <th>Prénom</th>
-                    <th>Adresse mail</th>
+                    <th>Email</th>
+		    <th>Statut</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -50,7 +51,8 @@
 									<?php echo "<td>".$unInvite['login']."</td>"; ?>
 									<?php echo "<td>".$unInvite['nom']."</td>"; ?>
 									<?php echo "<td>".$unInvite['prenom']."</td>"; ?>
-                                   <?php echo " <td>".$unInvite['mail']."</td>"; ?>
+                                  	 				<?php echo " <td>".$unInvite['mail']."</td>"; ?>
+									<?php if($unInvite['date_inscription'] != date("d.m.Y")){ echo "<td>inactif</td>";}else{ echo "<td>actif</td>";} ?>
 									<td><a class="btn btn-success btn btn-success" href="<?php echo base_url(); ?>index.php/portailinvite/supprimer_invite/<?php echo $unInvite['login'];?>"><i class="material-icons">supprimer</i></a></td>
                                     <td><a class="btn btn-success btn btn-success" href="<?php echo base_url(); ?>index.php/portailinvite/reinitaliser_compte/<?php echo $unInvite['login'];?>"><i class="material-icons">Réinitialiser le compte</i></a></td>
 							</tr>
