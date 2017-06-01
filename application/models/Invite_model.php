@@ -10,10 +10,10 @@ class Invite_model extends CI_Model {
         public function password_for_login($login)
 	{
 		$data = $this->db->select('password')
-		         ->from('portail_invite.invite')
-		         ->where('login', $login)			         
-			 ->get()
-			 ->result_array();
+		        ->from('portail_invite.invite') // On sélectionne la base de donnée et la table
+		        ->where('login', $login) //On filtre en prenant les élements correspondants au login
+				->get()
+				->result_array(); // On retourne le résultat sous forme d'un tableau
 			         
 		return $data;
 	}

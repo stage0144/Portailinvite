@@ -13,22 +13,23 @@ class Mail_model extends CI_Model {
 			$mail = new PHPMailer();
 			$mail->IsSMTP();
 			$mail->SMTPDebug = 0;
-			$mail->SMTPAuth = FALSE;
+			$mail->SMTPAuth = FALSE; // Désactive ou active l'authentification du serveur SMTP => peut poser des problèmes de sécurité
 			$mail->Port     = 25;
 			//$mail->SMTPSecure = "tls";
-			$mail->SMTPAutoTLS = false;
-			$mail->Username = "stagiaire.nantes@cheops.fr";
-			$mail->Password = "@Password@";
-			$mail->Host     = "10.44.1.1";
-			$mail->Mailer   = "smtp";
-			$mail->From 	= "stagiaire.nantes@cheops.fr";
-			$mail->FromName = "Cheops Technology";
+			$mail->SMTPAutoTLS = false; //Dans le cas ou on ne met pas d'authentification il est nécessaire de mettre cette ligne car le TLS se met par défaut
+			$mail->Username = "stagiaire.nantes@cheops.fr"; // Identifiants du compte SMTP
+			$mail->Password = "@Password@"; // Mot de passe du compte SMTP
+			$mail->Host     = "10.44.1.1"; // Serveur SMTP
+			$mail->Mailer   = "smtp"; 
+			$mail->From 	= "stagiaire.nantes@cheops.fr"; // Adresse Mail qui se chargera de l'envoi 
+			$mail->FromName = "Cheops Technology"; // Nom d'envoi
 			//$mail->AddReplyTo("from email", "PHPPot");
 			$adresse_mail_client = $email;
 			$mail->AddAddress($adresse_mail_client);
-			$mail->Subject = "Nouveau compte Portail Cheops";
+			$mail->Subject = "Nouveau compte Portail Cheops"; //Objet du mail
 			$mail->WordWrap   = 80;
 			$lien_du_site = "12345";
+			// COntenu du Mail
 			$content = "
 				<p>Bonjour,<br/>
 				   $prenom $nom</p>
