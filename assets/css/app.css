@@ -4,7 +4,7 @@ body {
     font-weight: 300;
 }
 .main {
-    background : #333 url(http://localhost/portailinvite/assets/fond.png) right top no-repeat;
+    background : #333 url(http://10.44.55.167/Portailinvite/assets/fond.png) right top no-repeat;
     background-size: contain;
     padding: 80px 20px 20px;
     margin-top: 120px;
@@ -75,9 +75,12 @@ input.form-control , input[type="submit"] , .btn {
         background-color: white;
         background-size: contain;
         margin-top: 50px;
-       margin-left: 0px;
-       margin-right: -200px;
+        margin-left: 0px;
+        margin-right: -200px;
         padding:0px 0px 0px 0px;
+    }
+   .titre {
+	margin-left: 10px;
     } 
 }
 
@@ -89,5 +92,5 @@ input.form-control , input[type="submit"] , .btn {
         margin-left: 10px;
         margin-right: -400px;
         padding: 10px 10px 10px 10px;
-    } 
+   }
 }
