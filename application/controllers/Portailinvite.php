@@ -70,7 +70,7 @@ class Portailinvite extends CI_Controller {
                 }
                 else if($this->logincheck($this->input->post('login')) && $this->passwordcheck($this->input->post('password')))
                 {
-					if(verif_date($this->input->post('login'))
+					if($this->Invite_model->verif_date($this->input->post('login')))
 					{
 						$this->connexion_wifi($this->input->post('login'),$this->input->post('password'));
 					}
