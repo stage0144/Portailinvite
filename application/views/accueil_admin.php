@@ -9,8 +9,8 @@
         <meta name="description" content="Connexion à mon application">
         <link rel="stylesheet" type="text/css" href="//10.44.55.167/Portailinvite/assets/css/bootstrap.min.css" />
         <!-- ci-dessous notre fichier CSS -->
-        <link rel="stylesheet" type="text/css" href="http://10.44.55.167/Portailinvite/assets/css/app.css" />
-        <link rel="stylesheet" type="text/css" href="http://10.44.55.167/Portailinvite/assets/css/fonts.css" />
+        <link rel="stylesheet" type="text/css" href="https://10.44.55.167/Portailinvite/assets/css/app.css" />
+        <link rel="stylesheet" type="text/css" href="https://10.44.55.167/Portailinvite/assets/css/fonts.css" />
         <script type="text/javascript" src="//10.44.55.167/Portailinvite/assets/js/jquery-1.11.0.min.js"></script>
         <script type="text/javascript" src="//10.44.55.167/Portailinvite/assets/js/bootstrap.min.js"></script>
     </head>

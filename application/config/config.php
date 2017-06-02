@@ -24,7 +24,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 
-$config['base_url'] = 'http://10.44.55.167/Portailinvite/';
+$config['base_url'] = 'https://10.44.55.167/Portailinvite/';
 
 /*
 |--------------------------------------------------------------------------
