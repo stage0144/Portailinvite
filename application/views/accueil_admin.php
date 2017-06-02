@@ -11,8 +11,6 @@
         <!-- ci-dessous notre fichier CSS -->
         <link rel="stylesheet" type="text/css" href="http://10.44.55.167/Portailinvite/assets/css/app.css" />
         <link rel="stylesheet" type="text/css" href="http://10.44.55.167/Portailinvite/assets/css/fonts.css" />
-	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Open+Sans:400,300" />
-        <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Lato:400,700,300" />
         <script type="text/javascript" src="//10.44.55.167/Portailinvite/assets/js/jquery-1.11.0.min.js"></script>
         <script type="text/javascript" src="//10.44.55.167/Portailinvite/assets/js/bootstrap.min.js"></script>
     </head>
