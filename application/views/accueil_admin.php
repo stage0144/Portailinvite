@@ -70,9 +70,8 @@
                                                 	echo "<td>actif</td>";
 							$test = false;
                                         	}
-					 ?>
+					 ?>  <?php // Dans le cas où le compte est inactif, le bouton de réactivation va aparaitre ?>
 				    <td><a class="btn btn-success btn btn-success" href="<?php echo base_url(); ?>index.php/portailinvite/supprimer_invite/<?php echo $unInvite['login'];?>"><i class="material-icons">supprimer</i></a></td>
-                                    // Dans le cas où le compte est inactif, le bouton de réactivation va aparaitre
 				    <?php if($test){ ?><td><a id="init" class="btn btn-success btn btn-success" href="<?php echo base_url(); ?>index.php/portailinvite/reinitaliser_compte/<?php echo $unInvite['login'];?>"><i class="material-icons">Réactiver le compte</i></a></td> <?php } ?>
 							</tr>
 				    <?php endforeach ?>
