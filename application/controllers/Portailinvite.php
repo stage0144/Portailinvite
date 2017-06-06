@@ -163,7 +163,7 @@ class Portailinvite extends CI_Controller {
 			if($this->form_validation->run()==FALSE){
 				$this->load->view('ajouter_invite');
 			}else{
-				$resultat = $this->Invite_model->ajouter_invite($_POST['nom'], $_POST['prenom'], $_POST['mail']);
+				$resultat = $this->Invite_model->ajouter_invite($_POST['nom'], $_POST['prenom'], $_POST['mail'],$_POST['statut']);
                			 $this->Mail_model->envoi_mail($_POST['nom'],$_POST['prenom'], $_POST['mail'],$resultat['login'],$resultat['password']);
 		        $this->accueil_admin();
             }

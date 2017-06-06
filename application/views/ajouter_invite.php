@@ -37,6 +37,17 @@
                 <div class="form-group">
                 <div class="col-md-8"><input name="mail" placeholder="Adresse mail" class="form-control" type="text" id="mail"/></div>
                 </div> 
+                <div class="row">
+                  <div class="col-md-8"> 
+					  <div class="col-xs-5">
+						<div class="form-group">
+						  <select name="statut" class="selectpicker form-control">
+							<option value=0>Invité</option>
+							<option value="7">Prestataire</option>
+						  </select>
+						</div>
+					  </div>
+					</div>                
                 <div class="form-group">
                 <div class="col-md-offset-0 col-md-3"><input  class="btn btn-success btn btn-success" type="submit" value="Ajouter"/></div>
                 </div>

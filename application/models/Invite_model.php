@@ -90,7 +90,7 @@ class Invite_model extends CI_Model {
 			'mail' => $mail,
 			'login' => $login,
         	'password' => $password,
-        	'date_inscription' => $date("d.m.Y")
+        	'date_inscription' => $date("d-m-Y")
 		);
 			
 		$this->db->insert('portail_invite.invite',$data);
@@ -134,12 +134,15 @@ class Invite_model extends CI_Model {
 	         
 	         if($data != NULL)
 	         {
-					$date_courante = date("d.m.Y");
-					$data[0]['date_inscription'];
-					if($date_courante != $data[0]['date_inscription']){
+					$date_courante = date("d-m-Y");
+					$djour = explode("-", $date_courante); 
+					$dfin = explode("-", $date_courante);
+					$finab = ($dfin[2]+$data[0]['statut']).$dfin[1].$dfin[0];  
+					$auj = $djour[2].$djour[1].$djour[0]; 
+					if ($auj>$finab)
+					{
 						return false;
-					}
-					else 
+					else
 					{
 						return true;
 					}
@@ -151,7 +154,7 @@ class Invite_model extends CI_Model {
 		public function reinitialiser_date($login)
 		{
 			$data = array(
-    			'date_inscription' => date("d.m.Y"),
+    			'date_inscription' => date("d-m-Y"),
 			);			
 			$this->db->where('login', $login);
 			$this->db->update('portail_invite.invite', $data);
