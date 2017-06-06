@@ -29,7 +29,7 @@ class Portailinvite extends CI_Controller {
 		$this->load->model('Invite_model');
 		$this->load->model('Mail_model');
 		$this->load->model('Admin_model');
-		
+		$this->load->model('Compte_model');
 	    $this->load->library('form_validation');
 		$this->load->helper('url');
 	}
@@ -161,11 +161,14 @@ class Portailinvite extends CI_Controller {
 			$this->form_validation->set_rules($rules);
 			
 			if($this->form_validation->run()==FALSE){
+				$data['type'] = $this->Compte_model->get_liste_type_comptes();
+                		$this->load->vars($data);
 				$this->load->view('ajouter_invite');
 			}else{
-				$resultat = $this->Invite_model->ajouter_invite($_POST['nom'], $_POST['prenom'], $_POST['mail'],$_POST['statut']);
-               			 $this->Mail_model->envoi_mail($_POST['nom'],$_POST['prenom'], $_POST['mail'],$resultat['login'],$resultat['password']);
-		        $this->accueil_admin();
+				$duree = $this->Compte_model->get_duree($_POST['type']);	
+				$resultat = $this->Invite_model->ajouter_invite($_POST['nom'], $_POST['prenom'], $_POST['mail'],$_POST['type'],$duree);
+               			$this->Mail_model->envoi_mail($_POST['nom'],$_POST['prenom'], $_POST['mail'],$resultat['login'],$resultat['password']);
+		        	$this->accueil_admin();
             }
     }
     
@@ -180,10 +183,35 @@ class Portailinvite extends CI_Controller {
                 $prenom = $unInvite['prenom'];
                 $mail = $unInvite['mail'];
                 $password = $unInvite['password'];
+		$type = $unInvite['type'];
             }
         }
+	$duree = $this->Compte_model->get_duree($type);
         $this->Mail_model->envoi_mail($nom,$prenom,$mail,$login,$password);
-        $this->Invite_model->reinitialiser_date($login);
+        $this->Invite_model->reinitialiser_date($login,$duree);
         $this->accueil_admin();
     }
+
+	public function ajouter_compte(){
+		$rules = [
+                                                [ 'field'  => 'type',
+                                                  'label'  => 'Type',
+                                                  'rules'  => 'required',
+                                                  'errors' => []
+                                                ],
+                                                [ 'field'  => 'duree',
+                                                  'label'  => 'Duree',
+                                                  'rules'  => 'required',
+                                                  'errors' => []
+						]
+               			 ];
+
+		$this->form_validation->set_rules($rules);
+               	if($this->form_validation->run()==FALSE){
+                	$this->load->view('ajouter_compte');
+                }else{
+                   	$resultat = $this->Compte_model->ajoute_compte($_POST['type'], $_POST['duree']);
+                        $this->accueil_admin();
+            	}
+	}
 }

@@ -28,18 +28,17 @@ class Mail_model extends CI_Model {
 			$mail->AddAddress($adresse_mail_client);
 			$mail->Subject = "Nouveau compte Portail Cheops"; //Objet du mail
 			$mail->WordWrap   = 80;
-			$lien_du_site = "12345";
 			// COntenu du Mail
 			$content = "
 				<p>Bonjour,<br/>
 				   $prenom $nom</p>
 				<p>Votre compte pour vous connecter au portail invite Cheops a ete cree :</p> 
-                <p>Login : <b>$login</b></p>
+                		<p>Login : <b>$login</b></p>
 				<p>Mot de passe : <b>$password</b></p>   
 				<br/>
 				<br/>
 				<p>Cordialement,<br/>
-				<h3>Cheops Technology</h3>";
+				<h3>Cheops Technology</h3>";	
 			$mail->MsgHTML($content);
 			$mail->IsHTML(true);
 			if(!$mail->Send()) 

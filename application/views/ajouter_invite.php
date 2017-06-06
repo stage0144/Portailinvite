@@ -41,13 +41,15 @@
                   <div class="col-md-8"> 
 					  <div class="col-xs-5">
 						<div class="form-group">
-						  <select name="statut" class="selectpicker form-control">
-							<option value=0>Invité</option>
-							<option value="7">Prestataire</option>
+						  <select name="type" class="selectpicker form-control">
+							<?php foreach ($type as $key => $compte) :?>
+							<option value=<?php echo $compte['type'] ?>><?php echo $compte['type'];?></option>
+							<?php endforeach ?>
 						  </select>
 						</div>
 					  </div>
-					</div>                
+					</div>
+		</div>                
                 <div class="form-group">
                 <div class="col-md-offset-0 col-md-3"><input  class="btn btn-success btn btn-success" type="submit" value="Ajouter"/></div>
                 </div>

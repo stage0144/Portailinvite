@@ -61,7 +61,7 @@ class Invite_model extends CI_Model {
         
         // Fonction qui ajoute dans la BDD un invité. A partir du nom et du prénom, le mot de passe et le login seront générés
         
-        public function ajouter_invite($nom,$prenom,$mail)
+        public function ajouter_invite($nom,$prenom,$mail,$type,$duree)
 	{
             
             // construction du login à partir du nom et du prénom et d'un nombre aléatoire
@@ -83,14 +83,16 @@ class Invite_model extends CI_Model {
                 	$random = rand(97,122);
                 	$password .= chr($random);
             	}
-            
+            	$test = 7;
 		$data = array(
 			'nom' => $nom,
 			'prenom' => $prenom,
 			'mail' => $mail,
 			'login' => $login,
-        	'password' => $password,
-        	'date_inscription' => $date("d-m-Y")
+			'type' => $type,
+        		'password' => $password,
+        		'date_inscription' => date("d-m-Y"),
+			'date_desactivation' => date("d-m-Y",mktime(0, 0, 0, date("m")  , date("d")+$duree[0]['duree'], date("Y")))
 		);
 			
 		$this->db->insert('portail_invite.invite',$data);
@@ -126,7 +128,7 @@ class Invite_model extends CI_Model {
         
         public function verif_date($login)
         {
-			$data = $this->db->select('*')
+		 $data = $this->db->select('*')
 	         ->from('portail_invite.invite')
 	         ->where('login', $login)
 	         ->get()
@@ -135,26 +137,28 @@ class Invite_model extends CI_Model {
 	         if($data != NULL)
 	         {
 					$date_courante = date("d-m-Y");
+					$date_fin = $data[0]['date_desactivation'];
 					$djour = explode("-", $date_courante); 
-					$dfin = explode("-", $date_courante);
-					$finab = ($dfin[2]+$data[0]['statut']).$dfin[1].$dfin[0];  
-					$auj = $djour[2].$djour[1].$djour[0]; 
+					$dfin = explode("-" , $date_fin); 
+					$auj = $djour[2].$djour[1].$djour[0];
+					$finab = $dfin[2].$dfin[1].$dfin[0];
 					if ($auj>$finab)
 					{
 						return false;
+					}
 					else
 					{
 						return true;
 					}
-			 }
 		}
+	}
 		
 		// Fonction permettant de réinitialiser la date d'inscription d'un invité pour lui redonner accès à la wifi dans la journée
 		
-		public function reinitialiser_date($login)
+		public function reinitialiser_date($login,$duree)
 		{
 			$data = array(
-    			'date_inscription' => date("d-m-Y"),
+    			'date_desactivation' => date("d-m-Y",mktime(0, 0, 0, date("m")  , date("d")+$duree[0]['duree'], date("Y")))
 			);			
 			$this->db->where('login', $login);
 			$this->db->update('portail_invite.invite', $data);

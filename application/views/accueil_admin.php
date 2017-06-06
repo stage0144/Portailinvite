@@ -26,8 +26,9 @@
             	<h1>Accueil administrateur du  WI-FI Cheops Invité</h1>
             	<h2>Liste des invités enregistrés</h2>
             	<a class="btn btn-success btn btn-success" href="<?php echo base_url(); ?>index.php/portailinvite/ajouter_invite"><i class="material-icons">Ajouter un invité</i></a>
-            	<a class="btn btn-success btn btn-success" href="<?php echo base_url(); ?>index.php"><i class="material-icons">Déconnexion</i></a>
-            </div>
+                <a class="btn btn-success btn btn-success" href="<?php echo base_url(); ?>index.php/portailinvite/ajouter_compte"><i class="material-icons">Nouveau type de compte</i></a>  
+                <a class="btn btn-success btn btn-success" href="<?php echo base_url(); ?>index.php"><i class="material-icons">Déconnexion</i></a>    
+      </div>
 		<div name="login" role="form" class="form-horizontal" method="post" accept-charset="utf-8">
                 <div class="col-md-6">
             <?php if($invites == array()){?>
@@ -36,7 +37,8 @@
                 <table class="table table-striped">
                 <thead>
                 <tr>
-                    <th>login</th>
+                    <th>Login</th>
+		    <th>Type</th>
                     <th>Nom</th>
                     <th>Prénom</th>
                     <th>Email</th>
@@ -46,13 +48,30 @@
                 <tbody>
                     <?php foreach ($invites as $key => $unInvite) :?>
                             <tr>
-									<?php echo "<td>".$unInvite['login']."</td>"; ?>
-									<?php echo "<td>".$unInvite['nom']."</td>"; ?>
-									<?php echo "<td>".$unInvite['prenom']."</td>"; ?>
-                                  	 				<?php echo " <td>".$unInvite['mail']."</td>"; ?>
-									<?php if($unInvite['date_inscription'] != date("d.m.Y")){ echo "<td>inactif</td>";}else{ echo "<td>actif</td>";} ?>
-									<td><a class="btn btn-success btn btn-success" href="<?php echo base_url(); ?>index.php/portailinvite/supprimer_invite/<?php echo $unInvite['login'];?>"><i class="material-icons">supprimer</i></a></td>
-                                    <td><a class="btn btn-success btn btn-success" href="<?php echo base_url(); ?>index.php/portailinvite/reinitaliser_compte/<?php echo $unInvite['login'];?>"><i class="material-icons">Réinitialiser le compte</i></a></td>
+					<?php echo "<td>".$unInvite['login']."</td>"; ?>
+					<?php echo "<td>".$unInvite['type']."</td>"; ?>
+					<?php echo "<td>".$unInvite['nom']."</td>"; ?>
+					<?php echo "<td>".$unInvite['prenom']."</td>"; ?>
+                                  	<?php echo " <td>".$unInvite['mail']."</td>"; ?>
+					<?php 	$date_courante = date("d-m-Y");
+                                        	$date_fin = $unInvite['date_desactivation'];
+                                        	$djour = explode("-", $date_courante); 
+                                        	$dfin = explode("-" , $date_fin); 
+                                        	$auj = $djour[2].$djour[1].$djour[0];
+                                        	$finab = $dfin[2].$dfin[1].$dfin[0];
+                                        	if ($auj>$finab)
+                                        	{
+                                                	echo "<td>inactif</td>";
+							$test = true;
+                                        	}
+                                        	else
+                                        	{
+                                                	echo "<td>actif</td>";
+							$test = false;
+                                        	}
+					 ?>
+				    <td><a class="btn btn-success btn btn-success" href="<?php echo base_url(); ?>index.php/portailinvite/supprimer_invite/<?php echo $unInvite['login'];?>"><i class="material-icons">supprimer</i></a></td>
+                                    <?php if($test){ ?><td><a id="init" class="btn btn-success btn btn-success" href="<?php echo base_url(); ?>index.php/portailinvite/reinitaliser_compte/<?php echo $unInvite['login'];?>"><i class="material-icons">Réactiver le compte</i></a></td> <?php } ?>
 							</tr>
 				    <?php endforeach ?>
                 </tbody>
