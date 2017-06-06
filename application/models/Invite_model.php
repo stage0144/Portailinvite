@@ -28,7 +28,7 @@ class Invite_model extends CI_Model {
 		         ->get()
 		         ->result_array();
 			         
-		if ($data != null)
+		if ($data != null) // Vu que l'on a récupérer dans un tableau les données correspondant au login, si celui-ci est null alors le login n'est pas présent dans la BDD
 		{
 			return true;
 		}
@@ -42,10 +42,11 @@ class Invite_model extends CI_Model {
         
     public function supprimer_invite($login)
 	{
+		//On va supprimer l'invité dans la BDD invite, mais aussi dans celle du radius
 		$this->db->where('login', $login);
 		$this->db->delete('portail_invite.invite');
 		$this->db->where('username', $login);
-        $this->db->delete('radius.radcheck');
+        	$this->db->delete('radius.radcheck');
 	}
         
         
@@ -91,8 +92,8 @@ class Invite_model extends CI_Model {
 			'login' => $login,
 			'type' => $type,
         		'password' => $password,
-        		'date_inscription' => date("d-m-Y"),
-			'date_desactivation' => date("d-m-Y",mktime(0, 0, 0, date("m")  , date("d")+$duree[0]['duree'], date("Y")))
+        		'date_inscription' => date("d-m-Y"), //On récupère la date actuelle
+			'date_desactivation' => date("d-m-Y",mktime(0, 0, 0, date("m")  , date("d")+$duree[0]['duree'], date("Y"))) //On prend la date actuelle à laquelle on rajoute le nombre de jours correspondant au type de compte
 		);
 			
 		$this->db->insert('portail_invite.invite',$data);
@@ -108,7 +109,7 @@ class Invite_model extends CI_Model {
 
 		 $this->db->insert('radius.radcheck',$data);
 		
-        $resultat['login'] = $login;
+        	$resultat['login'] = $login;
 		$resultat['password'] = $password;
 		return $resultat;
 	}
@@ -134,21 +135,21 @@ class Invite_model extends CI_Model {
 	         ->get()
 	         ->result_array();
 	         
-	         if($data != NULL)
+	         if($data != NULL) // si c'est null le login n'est pas présent dans la BDD 
 	         {
-					$date_courante = date("d-m-Y");
-					$date_fin = $data[0]['date_desactivation'];
-					$djour = explode("-", $date_courante); 
+					$date_courante = date("d-m-Y"); // On récupère la date actuelle
+					$date_fin = $data[0]['date_desactivation']; 
+					$djour = explode("-", $date_courante);  // On va créer un tableau avec les dates en utilisant le "-" comme séparateur
 					$dfin = explode("-" , $date_fin); 
-					$auj = $djour[2].$djour[1].$djour[0];
+					$auj = $djour[2].$djour[1].$djour[0]; // On inverse ensuite les éléments du tableau pour former un nombre qui nous permettra de comparer les dates
 					$finab = $dfin[2].$dfin[1].$dfin[0];
 					if ($auj>$finab)
 					{
-						return false;
+						return false; //dans ce cas la le compte est inactif
 					}
 					else
 					{
-						return true;
+						return true; //le compte est encore actif
 					}
 		}
 	}
@@ -158,7 +159,7 @@ class Invite_model extends CI_Model {
 		public function reinitialiser_date($login,$duree)
 		{
 			$data = array(
-    			'date_desactivation' => date("d-m-Y",mktime(0, 0, 0, date("m")  , date("d")+$duree[0]['duree'], date("Y")))
+    			'date_desactivation' => date("d-m-Y",mktime(0, 0, 0, date("m")  , date("d")+$duree[0]['duree'], date("Y"))) // On rajoute tant de jours en fonction du type de compte
 			);			
 			$this->db->where('login', $login);
 			$this->db->update('portail_invite.invite', $data);

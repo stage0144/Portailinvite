@@ -53,7 +53,8 @@
 					<?php echo "<td>".$unInvite['nom']."</td>"; ?>
 					<?php echo "<td>".$unInvite['prenom']."</td>"; ?>
                                   	<?php echo " <td>".$unInvite['mail']."</td>"; ?>
-					<?php 	$date_courante = date("d-m-Y");
+					<?php 	//Phase de vérification si le compte est actif ou non
+						$date_courante = date("d-m-Y");
                                         	$date_fin = $unInvite['date_desactivation'];
                                         	$djour = explode("-", $date_courante); 
                                         	$dfin = explode("-" , $date_fin); 
@@ -71,7 +72,8 @@
                                         	}
 					 ?>
 				    <td><a class="btn btn-success btn btn-success" href="<?php echo base_url(); ?>index.php/portailinvite/supprimer_invite/<?php echo $unInvite['login'];?>"><i class="material-icons">supprimer</i></a></td>
-                                    <?php if($test){ ?><td><a id="init" class="btn btn-success btn btn-success" href="<?php echo base_url(); ?>index.php/portailinvite/reinitaliser_compte/<?php echo $unInvite['login'];?>"><i class="material-icons">Réactiver le compte</i></a></td> <?php } ?>
+                                    // Dans le cas où le compte est inactif, le bouton de réactivation va aparaitre
+				    <?php if($test){ ?><td><a id="init" class="btn btn-success btn btn-success" href="<?php echo base_url(); ?>index.php/portailinvite/reinitaliser_compte/<?php echo $unInvite['login'];?>"><i class="material-icons">Réactiver le compte</i></a></td> <?php } ?>
 							</tr>
 				    <?php endforeach ?>
                 </tbody>

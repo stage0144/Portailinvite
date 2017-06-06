@@ -6,6 +6,8 @@
 			$this->load->database();
 		}
 
+		//Fonction qui permet de récupérer tous les types de compte sous forme d'un tableau
+
 		public function get_liste_type_comptes(){
 			$data = $this->db->select('*')
 				->from('portail_invite.compte')
@@ -13,6 +15,8 @@
 				->result_array();
 			return $data;
 		}
+
+		//Fonction qui permet de récupérer la durée durant laquelle le compte est actif selon le type de compte
 
 		public function get_duree($type){
 			$data = $this->db->select('duree')
@@ -22,6 +26,8 @@
 			         ->result_array();
 			return $data;
 		}
+
+		//Fonction qui permet d'ajouter un nouveau compte
 
 		public function ajoute_compte($type,$duree){
 			$data = array(

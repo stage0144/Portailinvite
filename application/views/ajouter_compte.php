@@ -32,7 +32,7 @@
              </div> 
 
                 <div class="form-group">
-                <div class="col-md-8"><input name="duree" placeholder="Durée de validation du compte" class="form-control" type="text" id="prenom"/></div>
+                <div class="col-md-8"><input name="duree" placeholder="Durée de validation du compte (en jours)" class="form-control" type="text" id="prenom"/></div>
                 </div> 
 		<div class="form-group">
                 <div class="col-md-offset-0 col-md-3"><input  class="btn btn-success btn btn-success" type="submit" value="Ajouter"/></div>

@@ -59,18 +59,18 @@ class Portailinvite extends CI_Controller {
                 }
             else
             {
-                if(strcmp($this->input->post('login'),"admin") == 0)
+                if(strcmp($this->input->post('login'),"admin") == 0) //On vérifie que si la personne est un administrateur
                 {
                         if($this->passwordcheck($this->input->post('password'))){
-                                $data['invites'] = $this->Invite_model->get_liste_invites();
+                                $data['invites'] = $this->Invite_model->get_liste_invites(); // on charge la liste des invités que l'on exporte vers la vue
                                 $this->load->vars($data);
                                 $this->load->view('accueil_admin');
 
                         }
                 }
-                else if($this->logincheck($this->input->post('login')) && $this->passwordcheck($this->input->post('password')))
+                else if($this->logincheck($this->input->post('login')) && $this->passwordcheck($this->input->post('password'))) // On vérifie que le login et le password sont bons
                 {
-					if($this->Invite_model->verif_date($this->input->post('login')))
+					if($this->Invite_model->verif_date($this->input->post('login'))) // On vérifie que le compte est encore actif
 					{
 						$this->connexion_wifi($this->input->post('login'),$this->input->post('password'));
 					}
@@ -160,14 +160,14 @@ class Portailinvite extends CI_Controller {
 					
 			$this->form_validation->set_rules($rules);
 			
-			if($this->form_validation->run()==FALSE){
-				$data['type'] = $this->Compte_model->get_liste_type_comptes();
+			if($this->form_validation->run()==FALSE){ // Le formulaire n'a pas été encore validé
+				$data['type'] = $this->Compte_model->get_liste_type_comptes(); // on charge les différents types de comptes pour que l'administrateur puisse choisir
                 		$this->load->vars($data);
 				$this->load->view('ajouter_invite');
 			}else{
 				$duree = $this->Compte_model->get_duree($_POST['type']);	
-				$resultat = $this->Invite_model->ajouter_invite($_POST['nom'], $_POST['prenom'], $_POST['mail'],$_POST['type'],$duree);
-               			$this->Mail_model->envoi_mail($_POST['nom'],$_POST['prenom'], $_POST['mail'],$resultat['login'],$resultat['password']);
+				$resultat = $this->Invite_model->ajouter_invite($_POST['nom'], $_POST['prenom'], $_POST['mail'],$_POST['type'],$duree); // On ajoute dans la BDD l'invité
+               			$this->Mail_model->envoi_mail($_POST['nom'],$_POST['prenom'], $_POST['mail'],$resultat['login'],$resultat['password']); // On envoi le mail récapitulatif
 		        	$this->accueil_admin();
             }
     }
@@ -177,7 +177,7 @@ class Portailinvite extends CI_Controller {
     public function reinitaliser_compte($login)
     {
         $invite = $this->Invite_model->get_invite($login);
-        foreach ($invite as $key => $unInvite){
+        foreach ($invite as $key => $unInvite){ // On va récupérer toutes les informations du compte à partir du login
             if($unInvite['login'] == $login){
                 $nom = $unInvite['nom'];
                 $prenom = $unInvite['prenom'];
@@ -186,9 +186,9 @@ class Portailinvite extends CI_Controller {
 		$type = $unInvite['type'];
             }
         }
-	$duree = $this->Compte_model->get_duree($type);
-        $this->Mail_model->envoi_mail($nom,$prenom,$mail,$login,$password);
-        $this->Invite_model->reinitialiser_date($login,$duree);
+	$duree = $this->Compte_model->get_duree($type); // On récupère la durée durant laquelle le compte est actif selon le type de compte
+        $this->Mail_model->envoi_mail($nom,$prenom,$mail,$login,$password); // On renvoi un mail
+        $this->Invite_model->reinitialiser_date($login,$duree); // On rajoute la durée correspondant au type de compte pour le réactiver
         $this->accueil_admin();
     }
 
@@ -207,10 +207,10 @@ class Portailinvite extends CI_Controller {
                			 ];
 
 		$this->form_validation->set_rules($rules);
-               	if($this->form_validation->run()==FALSE){
+               	if($this->form_validation->run()==FALSE){ // Dans le cas où le formulaire n'a pas été encore valider on affiche la vue
                 	$this->load->view('ajouter_compte');
                 }else{
-                   	$resultat = $this->Compte_model->ajoute_compte($_POST['type'], $_POST['duree']);
+                   	$resultat = $this->Compte_model->ajoute_compte($_POST['type'], $_POST['duree']); // On insère dans la BDD le nouveau type de compte puis on recharge l'accueil
                         $this->accueil_admin();
             	}
 	}
