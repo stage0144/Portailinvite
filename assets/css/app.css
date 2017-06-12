@@ -76,8 +76,9 @@ input.form-control , input[type="submit"] , .btn {
         background-size: contain;
         margin-top: 50px;
         margin-left: 0px;
-        margin-right: -200px;
+        margin-right: -500px;
         padding:0px 0px 0px 0px;
+
     }
    .titre {
 	margin-left: 10px;
@@ -90,7 +91,7 @@ input.form-control , input[type="submit"] , .btn {
         background-size: contain;
         margin-top: 50px;
         margin-left: 10px;
-        margin-right: -400px;
+        margin-right: -500px;
         padding: 10px 10px 10px 10px;
    }
 }
