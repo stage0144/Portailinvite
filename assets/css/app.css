@@ -9,8 +9,21 @@ body {
     padding: 80px 20px 20px;
     margin-top: 120px;
 }
+
+.main2 {
+    background : #333 url(http://10.44.55.167/Portailinvite/assets/fond_admin.jpg) right top no-repeat;
+    background-size: contain;
+    padding: 80px 20px 20px;
+    margin-top: 120px;
+}
+
 @media only screen and (max-width : 992px) {
     .main {
+        background: white;
+        padding: 80px 20px 20px;
+        margin-top: 30px;
+    }
+     .main2 {
         background: white;
         padding: 80px 20px 20px;
         margin-top: 30px;
