@@ -91,7 +91,7 @@ input.form-control , input[type="submit"] , .btn {
         background-size: contain;
         margin-top: 50px;
         margin-left: 10px;
-        margin-right: -500px;
+        margin-right: -200%;
         padding: 10px 10px 10px 10px;
    }
 }
