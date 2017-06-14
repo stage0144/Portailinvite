@@ -38,7 +38,7 @@
                 <div class="col-md-offset-0 col-md-3"><input  class="btn btn-success btn btn-success" type="submit" value="Ajouter"/></div>
                 </div>
                 <div class="form-group">
-                    <div class="col-md-offset-0 col-md-3"><input class="btn btn-success btn btn-success" type="button" value="Retour" onclick="window.location.href='<?php echo base_url(); ?>index.php/portailinvite/accueil_admin';" /></div>
+                    <div class="col-md-offset-0 col-md-3"><input class="btn btn-success btn btn-success" type="button" value="Retour" onclick="window.location.href='<?php echo base_url(); ?>index.php/administrateur/accueil_admin';" /></div>
                 </div>
             </div>
             </form>

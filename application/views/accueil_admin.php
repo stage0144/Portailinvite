@@ -25,9 +25,9 @@
 	    <div class="titre">
             	<h1>Accueil administrateur du  WI-FI Cheops Invité</h1>
             	<h2>Liste des invités enregistrés</h2>
-            	<a class="btn btn-success btn btn-success" href="<?php echo base_url(); ?>index.php/portailinvite/ajouter_invite"><i class="material-icons">Ajouter un invité</i></a>
-                <a class="btn btn-success btn btn-success" href="<?php echo base_url(); ?>index.php/portailinvite/ajouter_compte"><i class="material-icons">Nouveau type de compte</i></a>  
-                <a class="btn btn-success btn btn-success" href="<?php echo base_url(); ?>index.php"><i class="material-icons">Déconnexion</i></a>    
+            	<a class="btn btn-success btn btn-success" href="<?php echo base_url(); ?>index.php/administrateur/ajouter_invite"><i class="material-icons">Ajouter un invité</i></a>
+                <a class="btn btn-success btn btn-success" href="<?php echo base_url(); ?>index.php/administrateur/ajouter_compte"><i class="material-icons">Nouveau type de compte</i></a>  
+                <a class="btn btn-success btn btn-success" href="<?php echo base_url(); ?>index.php/administrateur"><i class="material-icons">Déconnexion</i></a>    
       </div>
 		<div name="login" role="form" class="form-horizontal" method="post" accept-charset="utf-8">
                 <div class="col-md-6">
@@ -71,8 +71,8 @@
 							$test = false;
                                         	}
 					 ?>  <?php // Dans le cas où le compte est inactif, le bouton de réactivation va aparaitre ?>
-				    <td><a class="btn btn-success btn btn-success" href="<?php echo base_url(); ?>index.php/portailinvite/supprimer_invite/<?php echo $unInvite['login'];?>"><i class="material-icons">supprimer</i></a></td>
-				    <?php if($test){ ?><td><a id="init" class="btn btn-success btn btn-success" href="<?php echo base_url(); ?>index.php/portailinvite/reinitaliser_compte/<?php echo $unInvite['login'];?>"><i class="material-icons">Réactiver le compte</i></a></td> <?php } ?>
+				    <td><a class="btn btn-success btn btn-success" href="<?php echo base_url(); ?>index.php/administrateur/supprimer_invite/<?php echo $unInvite['login'];?>"><i class="material-icons">supprimer</i></a></td>
+				    <?php if($test){ ?><td><a id="init" class="btn btn-success btn btn-success" href="<?php echo base_url(); ?>index.php/administrateur/reinitaliser_compte/<?php echo $unInvite['login'];?>"><i class="material-icons">Réactiver le compte</i></a></td> <?php } ?>
 							</tr>
 				    <?php endforeach ?>
                 </tbody>
