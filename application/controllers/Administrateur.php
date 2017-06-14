@@ -30,7 +30,7 @@ class Administrateur extends CI_Controller {
 		$this->load->model('Mail_model');
 		$this->load->model('Admin_model');
 		$this->load->model('Compte_model');
-	    $this->load->library('form_validation');
+      	        $this->load->library('form_validation');
 		$this->load->helper('url');
 	}
 	
@@ -61,9 +61,9 @@ class Administrateur extends CI_Controller {
                 {
 					if($this->logincheck($this->input->post('login')) && $this->passwordcheck($this->input->post('password'))) // On vérifie que le login et le password sont bons
 					{
-							data['invites'] = $this->Invite_model->get_liste_invites(); // on charge la liste des invités que l'on exporte vers la vue
-                            $this->load->vars($data);
-                            $this->load->view('accueil_admin');
+						$data['invites'] = $this->Invite_model->get_liste_invites(); // on charge la liste des invités que l'on exporte vers la vue
+                            			$this->load->vars($data);
+                            			$this->load->view('accueil_admin');
 					}
 				}
 		}
