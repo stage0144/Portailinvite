@@ -38,25 +38,25 @@ class Portailinvite extends CI_Controller {
 	 
 	public function index()
 	{
-                $rules = [
-                                                [ 'field'  => 'login',
-                                                  'label'  => 'Login',
-                                                  'rules'  => 'callback_logincheck',
-                                                  'errors' => []
-                                                ],
-                                                [ 'field'  => 'password',
-                                                  'label'  => 'Password',
-                                                  'rules'  => 'callback_passwordcheck',
-                                                  'errors' => []
-                                                ]
-                                        ];
+		$rules = [
+			[ 'field'  => 'login',
+			'label'  => 'Login',
+			'rules'  => 'callback_logincheck',
+			'errors' => []
+			],
+			[ 'field'  => 'password',
+			'label'  => 'Password',
+			'rules'  => 'callback_passwordcheck',
+			'errors' => []
+			]
+		];
 
-                $this->form_validation->set_rules($rules);
+		$this->form_validation->set_rules($rules);
 
-                if($this->form_validation->run()==FALSE)
-                {
-                        $this->load->view('connexion');
-                }
+		if($this->form_validation->run()==FALSE)
+		{
+			$this->load->view('connexion');
+		}
 		else
 		{
 			if($this->logincheck($this->input->post('login')) && $this->passwordcheck($this->input->post('password'))) // On vérifie que le login et le password sont bons
@@ -91,9 +91,9 @@ class Portailinvite extends CI_Controller {
     
     // Fonction qui vérifie que le mot de passe correspond bien au login
 	
-public function passwordcheck($password)
+	public function passwordcheck($password)
     {
-    	$data = FALSE;
+		$data = FALSE;
     	if(($this->Invite_model->password_for_login($this->input->post('login')) != array())){
     		if($this->Invite_model->password_for_login($this->input->post('login'))[0]['password'] == $password){
     			$data = TRUE;
