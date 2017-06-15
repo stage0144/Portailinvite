@@ -57,20 +57,24 @@ class Portailinvite extends CI_Controller {
                 {
                         $this->load->view('connexion');
                 }
-            else
-            {
-                if($this->logincheck($this->input->post('login')) && $this->passwordcheck($this->input->post('password'))) // On vérifie que le login et le password sont bons
-                {
-					if($this->Invite_model->verif_date($this->input->post('login'))) // On vérifie que le compte est encore actif
+				else
+				{
+					if($this->logincheck($this->input->post('login')) && $this->passwordcheck($this->input->post('password'))) // On vérifie que le login et le password sont bons
 					{
-						$this->connexion_wifi($this->input->post('login'),$this->input->post('password'));
+						if($this->Invite_model->verif_date($this->input->post('login'))) // On vérifie que le compte est encore actif
+						{
+							$this->connexion_wifi($this->input->post('login'),$this->input->post('password'));
+						}
+						else
+						{
+							$this->load->view('compte_invalide');
+						}
 					}
 					else
 					{
-						$this->load->view('compte_invalide');
+						$this->load->view('mauvais_identifiants');
 					}
 				}
-			}
 	}
     
 
