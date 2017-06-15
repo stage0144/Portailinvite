@@ -57,24 +57,24 @@ class Portailinvite extends CI_Controller {
                 {
                         $this->load->view('connexion');
                 }
+		else
+		{
+			if($this->logincheck($this->input->post('login')) && $this->passwordcheck($this->input->post('password'))) // On vérifie que le login et le password sont bons
+			{
+				if($this->Invite_model->verif_date($this->input->post('login'))) // On vérifie que le compte est encore actif
+				{
+					$this->connexion_wifi($this->input->post('login'),$this->input->post('password'));
+				}
 				else
 				{
-					if($this->logincheck($this->input->post('login')) && $this->passwordcheck($this->input->post('password'))) // On vérifie que le login et le password sont bons
-					{
-						if($this->Invite_model->verif_date($this->input->post('login'))) // On vérifie que le compte est encore actif
-						{
-							$this->connexion_wifi($this->input->post('login'),$this->input->post('password'));
-						}
-						else
-						{
-							$this->load->view('compte_invalide');
-						}
-					}
-					else
-					{
-						$this->load->view('mauvais_identifiants');
-					}
+					$this->load->view('compte_invalide');
 				}
+			}
+			else
+			{
+				$this->load->view('mauvais_identifiants');
+			}
+		}
 	}
     
 
@@ -91,7 +91,7 @@ class Portailinvite extends CI_Controller {
     
     // Fonction qui vérifie que le mot de passe correspond bien au login
 	
-	public function passwordcheck($password)
+public function passwordcheck($password)
     {
     	$data = FALSE;
     	if(($this->Invite_model->password_for_login($this->input->post('login')) != array())){
