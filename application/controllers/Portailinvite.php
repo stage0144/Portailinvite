@@ -60,20 +60,16 @@ class Portailinvite extends CI_Controller {
 		else
 		{
 			if($this->logincheck($this->input->post('login')) && $this->passwordcheck($this->input->post('password'))) // On vérifie que le login et le password sont bons
-			{
-				if($this->Invite_model->verif_date($this->input->post('login'))) // On vérifie que le compte est encore actif
-				{
-					$this->connexion_wifi($this->input->post('login'),$this->input->post('password'));
-				}
-				else
-				{
-					$this->load->view('compte_invalide');
-				}
-			}
-			else
-			{
-				$this->load->view('mauvais_identifiants');
-			}
+                        {
+                                if($this->Invite_model->verif_date($this->input->post('login'))) // On vérifie que le compte est encore actif
+                                {
+                                        $this->connexion_wifi($this->input->post('login'),$this->input->post('password'));
+                                }
+                                else
+                                {
+                                        $this->load->view('compte_invalide');
+                                }
+                        }	
 		}
 	}
     
@@ -83,7 +79,7 @@ class Portailinvite extends CI_Controller {
     public function logincheck($login)
     {
         $data = FALSE;
-    	if(($this->Invite_model->login_in($login))){
+    	if($this->Invite_model->login_in($login)){
         	$data = TRUE;
         }
         return $data;
@@ -104,6 +100,6 @@ class Portailinvite extends CI_Controller {
 
  
     public function connexion_wifi($login,$password){
-        redirect("HTTPS://securelogin.arubanetworks.com/cgi-bin/login?user=".$login."&password=".$password."&cmd=authenticate ");
+        redirect("HTTPS://securelogin.arubanetworks.com/cgi-bin/login?user=".$login."&password=".$password."&cmd=authenticate");
     }
 }
